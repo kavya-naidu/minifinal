@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Student Details{% endblock %}
+
+{% block content %}
+
+    <h2>Student Information Form</h2>
+    <form action="/submit" method="POST" id="studentForm">
+
+        <label for="id">ID:</label>
+        <input type="number" id="id" name="id" placeholder="Enter ID" min="0" required>
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter Name" required>
+
+        <label for="maths">Maths:</label>
+        <input type="number" id="maths" name="maths" placeholder="Enter Maths Marks" min="0" required oninput="calculatePercentage()">
+
+        <label for="biology">Biology:</label>
+        <input type="number" id="biology" name="biology" placeholder="Enter Biology Marks" min="0" required oninput="calculatePercentage()">
+
+        <label for="social">Social:</label>
+        <input type="number" id="social" name="social" placeholder="Enter Social Marks" min="0" required oninput="calculatePercentage()">
+
+        <label for="percentage">Percentage:</label>
+        <input type="text" id="percentage" name="percentage" placeholder="Calculated Percentage" readonly>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        // Function to calculate percentage based on the subject marks
+        function calculatePercentage() {
+            // Get marks from the form
+            const maths = parseFloat(document.getElementById("maths").value) || 0;
+            const biology = parseFloat(document.getElementById("biology").value) || 0;
+            const social = parseFloat(document.getElementById("social").value) || 0;
+
+            // Calculate total marks obtained and total possible marks
+            const totalObtained = maths + biology + social;
+            const totalPossible = 300; // Assuming each subject is out of 100
+
+            // Calculate percentage
+            const percentage = (totalObtained / totalPossible) * 100;
+
+            // Display the percentage in the 'percentage' field
+            document.getElementById("percentage").value = percentage.toFixed(2) + '%';
+        }
+    </script>
+
+{% endblock %}
