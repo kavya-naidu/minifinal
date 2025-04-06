@@ -5,5 +5,5 @@
     plan: free
     branch: main
      buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn app.py"
+    startCommand: "gunicorn app:app"
     autoDeploy: false
